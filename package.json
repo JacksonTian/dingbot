@@ -10,5 +10,6 @@
   "license": "MIT",
   "dependencies": {
     "httpx": "^2.1.1"
-  }
+  },
+  "files": ["index.js"]
 }
