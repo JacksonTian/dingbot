@@ -8,7 +8,7 @@ $ npm install dingbot --save
 
 ## Usage
 
-```
+```js
 'use strict';
 
 const Bot = require('dingbot');
