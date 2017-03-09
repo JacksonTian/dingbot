@@ -1,6 +1,6 @@
 {
   "name": "dingbot",
-  "version": "1.0.0",
+  "version": "1.0.0-generator",
   "description": "DingTalk Group Bot",
   "main": "index.js",
   "scripts": {
