@@ -7,20 +7,22 @@ class Bot {
     this.webhook = webhook;
   }
 
-  * send(content) {
-    var response = yield httpx.request(this.webhook, {
+  send(content) {
+    return httpx.request(this.webhook, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
       data: JSON.stringify(content)
+    }).then((response) => {
+      return httpx.read(response, 'utf8');
+    }).then((data) => {
+      return JSON.parse(data);
     });
-    var data = yield httpx.read(response, 'utf8');
-    return JSON.parse(data);
   }
 
-  * text(content, at = {}) {
-    return yield this.send({
+  text(content, at = {}) {
+    return this.send({
       'msgtype': 'text',
       'text': {
         'content': content
@@ -29,15 +31,15 @@ class Bot {
     });
   }
 
-  * link(link) {
-    return yield this.send({
+  link(link) {
+    return this.send({
       'msgtype': 'link',
       'link': link
     });
   }
 
-  * markdown(title, text) {
-    return yield this.send({
+  markdown(title, text) {
+    return this.send({
       'msgtype': 'markdown',
       'markdown': {
         'title': title,
