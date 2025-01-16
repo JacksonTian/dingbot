@@ -1,5 +1,9 @@
 # dingbot
 
+![NPM Version](https://img.shields.io/npm/v/dingbot)
+![NPM Downloads](https://img.shields.io/npm/dm/dingbot)
+![NPM License](https://img.shields.io/npm/l/dingbot)
+
 钉钉群机器人 Node.js SDK。
 
 ## Installation
