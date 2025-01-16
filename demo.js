@@ -1,4 +1,5 @@
-import Bot from "./index.js";
+import process from 'process';
+import Bot from './index.js';
 
 const bot = new Bot('https://oapi.dingtalk.com/robot/send?access_token=' + process.env.TOKEN);
 
