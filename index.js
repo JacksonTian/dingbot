@@ -1,28 +1,33 @@
 'use strict';
 
-const httpx = require('httpx');
+import {request, read} from 'httpx';
 
-class Bot {
-  constructor(webhook) {
+export default class Bot {
+  constructor(webhook, options = {}) {
     this.webhook = webhook;
+    this.options = options;
   }
 
-  send(content) {
-    return httpx.request(this.webhook, {
+  async send(content) {
+    const response = await request(this.webhook, {
+      ...this.options, // the httpx options
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
       data: JSON.stringify(content)
-    }).then((response) => {
-      return httpx.read(response, 'utf8');
-    }).then((data) => {
-      return JSON.parse(data);
     });
+    const body = await read(response, 'utf8');
+    const data = JSON.parse(body);
+    if (data.errcode !== 0) {
+      throw new Error(`code: ${data.errcode}, ${data.errmsg}`);
+    }
+
+    return data;
   }
 
-  text(content, at = {}) {
-    return this.send({
+  async text(content, at = {}) {
+    return await this.send({
       'msgtype': 'text',
       'text': {
         'content': content
@@ -31,15 +36,15 @@ class Bot {
     });
   }
 
-  link(link) {
-    return this.send({
+  async link(link) {
+    return await this.send({
       'msgtype': 'link',
       'link': link
     });
   }
 
-  markdown(title, text) {
-    return this.send({
+  async markdown(title, text) {
+    return await this.send({
       'msgtype': 'markdown',
       'markdown': {
         'title': title,
@@ -48,5 +53,3 @@ class Bot {
     });
   }
 }
-
-module.exports = Bot;
