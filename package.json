@@ -1,15 +1,19 @@
 {
   "name": "dingbot",
-  "version": "1.1.0",
+  "version": "2.0.0",
   "description": "DingTalk Group Bot",
+  "type": "module",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
+  "author": "Jackson Tian",
   "license": "MIT",
   "dependencies": {
-    "httpx": "^2.1.1"
+    "httpx": "^3"
   },
-  "files": ["index.js"]
+  "files": ["index.js"],
+  "engines": {
+    "node": ">= 12"
+  }
 }
